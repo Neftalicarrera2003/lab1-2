@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <title>my First Map</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+   </style>
+</head>
+<body>
+   <div id='map'></div>
+   <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoibmVmdGFsaWNhcnJlcmEiLCJhIjoiY211eDBmdmM4MDB4MDJ5cHUyZzY4cmR1eCJ9._pjUB56n9aJcU0DXYzz_LA';
+      const mymap = new mapboxgl.Map({
+             container: 'map',
+             //style: 'mapbox://styles/mapbox/navigation-night-v1',
+             //projection: 'globe', //Display the map as a globe since satellite-v9 defaults to Mercator
+             center: [-122.34, 47.60], // the center coordinates for Seattle
+             zoom:12 //zoomed into the city of Seattle
+          });
+// code from the next step will go here!
+   //this code allows you to add fullscreen controlsto the map
+   mymap.addControl(new mapboxgl.FullscreenControl());
+   //this code allows you to add navigation controls to the map
+   mymap.addControl(new mapboxgl.NavigationControl());
+   //This code configures the appearance of the mapbox standard basemap after it loads
+   mymap.on('style.load', () => {
+      //This code changes the maps lighting into a darker appearance
+       mymap.setConfigProperty('basemap', 'lightPreset', 'dusk');
+       //this code hides points of interest, such as business and attraction labels
+       mymap.setConfigProperty('basemap', 'showPointOfInterestLabels', false);
+      //I set this property to false to hide three-dimensional objects, including buildings, 
+      //landmarks, and trees. This creates a simpler map that emphasizes the overall geographic 
+      //layout instead of detailed 3D features. This setting is useful when the goal is to 
+      //focus on geographic patterns rather than building representations.
+      mymap.setConfigProperty('basemap', 'show3dObjects', false);
+      //I set this property to false to hide road labels and road shields. 
+      //This reduces visual clutter and makes the map less crowded. 
+      //This setting is useful when creating a map that focuses on other geographic features 
+      //rather than road names.
+      mymap.setConfigProperty('basemap', 'showRoadLabels', false);
+   });
+</script>
+</body>
+</html>
